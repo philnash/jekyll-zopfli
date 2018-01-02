@@ -30,7 +30,9 @@ bundle install
 
 ## Usage
 
-Once you have the gem installed, run `bundle exec jekyll build`. In your destination directory (`_site` by default) you will find gzipped files.
+Once you have the gem installed, run `JEKYLL_ENV=production bundle exec jekyll build`. In your destination directory (`_site` by default) you will find gzipped files.
+
+Due to the time it takes to generate zopfli files, this plugin only works when the `JEKYLL_ENV` environment variable is set to `production`.
 
 ### Serving pre-compiled gzip files
 
