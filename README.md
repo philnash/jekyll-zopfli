@@ -2,7 +2,11 @@
 
 Generate gzipped assets and files for your Jekyll site at build time using [Zopfli](https://github.com/google/zopfli) compression.
 
-[![Build Status](https://travis-ci.org/philnash/jekyll-zopfli.svg?branch=master)](https://travis-ci.org/philnash/jekyll-zopfli)
+[![Gem Version](https://badge.fury.io/rb/jekyll-zopfli.svg)](https://rubygems.org/gems/jekyll-zopfli) [![Build Status](https://travis-ci.org/philnash/jekyll-zopfli.svg?branch=master)](https://travis-ci.org/philnash/jekyll-zopfli) [![Maintainability](https://api.codeclimate.com/v1/badges/177f76759bc3b996e9e2/maintainability)](https://codeclimate.com/github/philnash/jekyll-zopfli/maintainability) [![Inline docs](https://inch-ci.org/github/philnash/jekyll-zopfli.svg?branch=master)](https://inch-ci.org/github/philnash/jekyll-zopfli)
+
+[API docs](http://www.rubydoc.info/gems/jekyll-zopfli/) | [GitHub repo](https://github.com/philnash/jekyll-zopfli)
+
+## Why?
 
 Performance in web applications is important. You know that, which is why you have created a static site using Jekyll. But you want a bit more performance. You're serving your assets and files gzipped, but you're making your webserver do it?
 
@@ -13,6 +17,10 @@ Why not just generate those gzip files at build time? And with Google's Zopfli a
 ### Warning
 
 Zopfli is a much slower algorithm than Zlib, so this will likely significantly slow down your site build. If you still want to generate gzip files at build time with a faster build time and Zlib's compression level, check out [`Jekyll::Gzip`](https://github.com/philnash/jekyll-gzip).
+
+### Want even more compression?
+
+Zopfli is about the best compression we can get out of the gzip format, but there's more! [Brotli](https://en.wikipedia.org/wiki/Brotli) is a relatively new compression format that is now [supported by many browsers](https://caniuse.com/#search=brotli) and can produce even smaller files. You can use brotli compression alongside gzip in your Sinatra app with [`Jekyll::Brotli`](http://github.com/philnash/jekyll-brotli).
 
 ## Installation
 
@@ -48,9 +56,20 @@ gzip_static on;
 
 The `ngx_http_gzip_static_module` module is not built by default, so you may need to enable using the `--with-http_gzip_static_module` configuration parameter.
 
+#### Apache
+
+In either a `<Directory>` section in your Apache config or in an `.htaccess` file, add the following:
+
+```
+AddEncoding gzip .gz
+RewriteCond %{HTTP:Accept-encoding} gzip
+RewriteCond %{REQUEST_FILENAME}.gz -f
+RewriteRule ^(.*)$ $1.gz [QSA,L]
+```
+
 #### Other web servers
 
-TODO: instructions for other web servers like Apache, HAProxy, etc.
+TODO: instructions for other web servers like HAProxy, h2o etc.
 
 Do you know how to do this for a different server? Please open a [pull request](https://github.com/philnash/jekyll-zopfli/pulls) or an [issue](https://github.com/philnash/jekyll-zopfli/issues) with the details!
 
