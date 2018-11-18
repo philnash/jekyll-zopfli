@@ -5,6 +5,7 @@
 ### Added
 
 * Hooks into Jekyll::Assets if available
+* Adds frozen string literal comment
 
 ### Changed
 
