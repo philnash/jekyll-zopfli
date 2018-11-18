@@ -3,6 +3,7 @@
 require 'jekyll/zopfli/version'
 require 'jekyll/zopfli/config'
 require 'jekyll/zopfli/compressor'
+require 'pathname'
 
 module Jekyll
   module Zopfli

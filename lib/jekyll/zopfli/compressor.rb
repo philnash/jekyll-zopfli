@@ -4,7 +4,13 @@ require 'jekyll/zopfli/config'
 require 'zopfli'
 
 module Jekyll
+  ##
+  # The main namespace for +Jekyll::Zopfli+. Includes the +Compressor+ module
+  # which is used to map over files, either using an instance of +Jekyll::Site+
+  # or a directory path, and compress them using Zopfli.
   module Zopfli
+    ##
+    # The module that does the compressing using Zopfli.
     module Compressor
       ##
       # Takes an instance of +Jekyll::Site+ and maps over the site files
@@ -28,7 +34,7 @@ module Jekyll
       # in place.
       #
       # @example
-      #     Jekyll::Zopfli::Compressor.compress_directory("~/blog/_site")
+      #     Jekyll::Zopfli::Compressor.compress_directory("~/blog/_site", site)
       #
       # @param dir [Pathname, String] The path to a directory of files ready for
       #   compression.
