@@ -30,6 +30,8 @@ module Jekyll
       #
       # @param dir [Pathname, String] The path to a directory of files ready for
       #   compression.
+      # @param site [Jekyll::Site] An instance of the `Jekyll::Site` used for
+      #   config.
       #
       # @return void
       def self.compress_directory(dir, site)
