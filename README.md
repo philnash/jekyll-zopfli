@@ -27,7 +27,9 @@ Zopfli is about the best compression we can get out of the gzip format, but ther
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'jekyll-zopfli'
+group :jekyll_plugins do
+  gem 'jekyll-zopfli'
+end
 ```
 
 And then execute:
@@ -36,11 +38,55 @@ And then execute:
 bundle install
 ```
 
+Then add the plugin to the `plugins` key in your `_config.yml`
+
+```yml
+plugins:
+  - jekyll-zopfli
+```
+
 ## Usage
 
-Once you have the gem installed, run `JEKYLL_ENV=production bundle exec jekyll build`. In your destination directory (`_site` by default) you will find gzipped files.
+Once you have the gem installed, build your Jekyll site in production mode. On Mac/Linux you can run
 
-Due to the time it takes to generate zopfli files, this plugin only works when the `JEKYLL_ENV` environment variable is set to `production`.
+```bash
+JEKYLL_ENV=production bundle exec jekyll build
+```
+
+On Windows, set the `JEKYLL_ENV` environment variable to `"production"`. Check out [this blog post on setting environment variables on Windows](https://www.twilio.com/blog/2017/01/how-to-set-environment-variables.html). Then run:
+
+```bash
+bundle exec jekyll build
+```
+
+In your destination directory (`_site` by default) you will find gzipped versions of all your text files.
+
+`Jekyll::Zopfli` only runs when the environment variable `JEKYLL_ENV` is set to `production` as dealing with gzipping files is unnecessary in development mode and just slows down the site build.
+
+### Configuration
+
+By default, `Jekyll::Zopfli` will compress all files with the following extensions:
+
+- '.html'
+- '.css'
+- '.js'
+- '.txt'
+- '.ttf'
+- '.atom'
+- '.stl'
+- '.xml'
+- '.svg'
+- '.eot'
+
+You can supply your own extensions by adding a `zopfli` key to your site's `_config.yml` listing the extensions that you want to compress. For example to only compress HTML, CSS and JavaScript files, add the following to `_config.yml`:
+
+```yml
+zopfli:
+  extensions:
+    - '.html'
+    - '.css'
+    - '.js
+```
 
 ### Serving pre-compiled gzip files
 
