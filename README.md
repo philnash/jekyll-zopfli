@@ -65,6 +65,8 @@ In your destination directory (`_site` by default) you will find gzipped version
 
 ### Configuration
 
+#### Extensions
+
 By default, `Jekyll::Zopfli` will compress all files with the following extensions:
 
 - '.html'
@@ -86,6 +88,15 @@ zopfli:
     - '.html'
     - '.css'
     - '.js
+```
+
+#### Replacing the original file
+
+If you host your Jekyll site on AWS S3 you can take advantage of `Jekyll::Zopfli` for compressing the whole site. The only difference is that you need to replace the uncompressed file with the gzipped file (that is, without a `.gz` extension). To enable this in `Jekyll::Zopfli` turn the `replace_files` setting to `true`.
+
+```yml
+zopfli:
+  replace_files: true
 ```
 
 ### Serving pre-compiled gzip files

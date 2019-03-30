@@ -25,7 +25,7 @@ module Jekyll
       # @return void
       def self.compress_site(site)
         site.each_site_file do |file|
-          compress_file(file.destination(site.dest), zippable_extensions(site))
+          compress_file(file.destination(site.dest), extensions: zippable_extensions(site))
         end
       end
 
@@ -45,7 +45,7 @@ module Jekyll
       def self.compress_directory(dir, site)
         extensions = zippable_extensions(site).join(',')
         files = Dir.glob(dir + "**/*{#{extensions}}")
-        files.each { |file| compress_file(file, zippable_extensions(site)) }
+        files.each { |file| compress_file(file, extensions: zippable_extensions(site)) }
       end
 
       ##
@@ -60,11 +60,13 @@ module Jekyll
       # @param file_name [String] The file name of the file we want to compress
       # @param extensions [Array<String>] The extensions of files that will be
       #    compressed.
+      # @param replace_file [Boolean] Whether the origina file should be
+      #    replaced or written alongside the original with a `.gz` extension
       #
       # @return void
-      def self.compress_file(file_name, extensions)
+      def self.compress_file(file_name, extensions: [], replace_file: false)
         return unless extensions.include?(File.extname(file_name))
-        zipped = "#{file_name}.gz"
+        zipped = replace_file ? file_name : "#{file_name}.gz"
         contents = ::Zopfli.deflate(File.read(file_name), format: :gzip)
         File.open(zipped, "w+") do |file|
           file << contents
