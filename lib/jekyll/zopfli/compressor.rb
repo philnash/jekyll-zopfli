@@ -25,7 +25,7 @@ module Jekyll
       # @return void
       def self.compress_site(site)
         site.each_site_file do |file|
-          compress_file(file.destination(site.dest), extensions: zippable_extensions(site))
+          compress_file(file.destination(site.dest), extensions: zippable_extensions(site), replace_file: replace_files(site))
         end
       end
 
@@ -45,7 +45,7 @@ module Jekyll
       def self.compress_directory(dir, site)
         extensions = zippable_extensions(site).join(',')
         files = Dir.glob(dir + "**/*{#{extensions}}")
-        files.each { |file| compress_file(file, extensions: zippable_extensions(site)) }
+        files.each { |file| compress_file(file, extensions: zippable_extensions(site), replace_file: replace_files(site)) }
       end
 
       ##
@@ -60,7 +60,7 @@ module Jekyll
       # @param file_name [String] The file name of the file we want to compress
       # @param extensions [Array<String>] The extensions of files that will be
       #    compressed.
-      # @param replace_file [Boolean] Whether the origina file should be
+      # @param replace_file [Boolean] Whether the original file should be
       #    replaced or written alongside the original with a `.gz` extension
       #
       # @return void
@@ -78,6 +78,11 @@ module Jekyll
 
       def self.zippable_extensions(site)
         site.config['zopfli'] && site.config['zopfli']['extensions'] || Jekyll::Zopfli::DEFAULT_CONFIG['extensions']
+      end
+
+      def self.replace_files(site)
+        replace_files = site.config.dig('zopfli', 'replace_files')
+        replace_files.nil? ? Jekyll::Zopfli::DEFAULT_CONFIG['replace_files'] : replace_files
       end
     end
   end
