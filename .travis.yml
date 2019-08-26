@@ -6,6 +6,9 @@ rvm:
   - 2.4
   - 2.3
   - ruby-head
+env:
+  - 'JEKYLL_VERSION=~>3.0'
+  - 'JEKYLL_VERSION=~>4.0'
 matrix:
   allow_failures:
     - rvm: ruby-head
