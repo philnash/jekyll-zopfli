@@ -60,7 +60,7 @@ RSpec.describe Jekyll::Zopfli::Compressor do
     end
 
     describe "given a Jekyll site" do
-      let!(:files) {
+      let(:files) {
         [
           dest_dir("index.html"),
           dest_dir("css/main.css"),
@@ -73,7 +73,7 @@ RSpec.describe Jekyll::Zopfli::Compressor do
       it "compresses all files in the site" do
         Jekyll::Zopfli::Compressor.compress_site(site)
         files.each do |file_name|
-          expect(File.exist?("#{file_name}.gz"))
+          expect(File.exist?("#{file_name}.gz")).to be true
         end
       end
 
@@ -101,7 +101,7 @@ RSpec.describe Jekyll::Zopfli::Compressor do
         it "compresses all the text files in the directory" do
           Jekyll::Zopfli::Compressor.compress_directory(dest_dir, site)
           files.each do |file_name|
-            expect(File.exist?("#{file_name}.gz"))
+            expect(File.exist?("#{file_name}.gz")).to be true
           end
         end
       end
