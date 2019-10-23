@@ -73,7 +73,6 @@ RSpec.describe Jekyll::Zopfli::Compressor do
 
     it "compresses all files in the site" do
       Jekyll::Zopfli::Compressor.compress_site(site)
-      puts Dir.glob("#{dest_dir('')}**/*")
       files.each do |file_name|
         expect(File.exist?("#{file_name}.gz")).to be true
       end
