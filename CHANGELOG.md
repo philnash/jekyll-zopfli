@@ -4,6 +4,12 @@
 
 ...
 
+## 2.3.0 (2019-10-23) [☰](https://github.com/philnash/jekyll-zopfli/compare/v2.2.0...v2.3.0)
+
+### Changed
+
+- Fixed tests and actually replaces files when it is supposed to. Thanks @pat!
+
 ## 2.2.0 (2019-08-26) [☰](https://github.com/philnash/jekyll-zopfli/compare/v2.1.0...v2.2.0)
 
 ### Changed
