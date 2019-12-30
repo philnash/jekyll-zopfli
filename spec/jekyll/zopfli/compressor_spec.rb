@@ -60,7 +60,7 @@ RSpec.describe Jekyll::Zopfli::Compressor do
     end
   end
 
-  describe "given a Jekyll site" do
+  describe "full site compression" do
     let(:files) {
       [
         dest_dir("index.html"),
@@ -71,31 +71,33 @@ RSpec.describe Jekyll::Zopfli::Compressor do
       ]
     }
 
-    it "compresses all files in the site" do
-      Jekyll::Zopfli::Compressor.compress_site(site)
-      files.each do |file_name|
-        expect(File.exist?("#{file_name}.gz")).to be true
+    describe "given a Jekyll site" do
+      it "compresses all files in the site" do
+        Jekyll::Zopfli::Compressor.compress_site(site)
+        files.each do |file_name|
+          expect(File.exist?("#{file_name}.gz")).to be true
+        end
       end
-    end
 
-    it "replaces the files if the settings say so" do
-      original_stats = files.inject({}) { |hash, file|
-        hash[file] = {size: File.size(file), content: File.read(file)}
-        hash
-      }
-
-      site.config['zopfli'] ||= {}
-      site.config['zopfli']['replace_files'] = true
-      Jekyll::Zopfli::Compressor.compress_site(site)
-
-      files.each { |file|
-        expect(File.exist?("#{file}")).to be true
-        expect(File.exist?("#{file}.gz")).to be false
-        expect(File.size(file)).to be < original_stats[file][:size]
-        Zlib::GzipReader.open("#{file}") {|gz|
-          expect(gz.read).to eq(original_stats[file][:content])
+      it "replaces the files if the settings say so" do
+        original_stats = files.inject({}) { |hash, file|
+          hash[file] = {size: File.size(file), content: File.read(file)}
+          hash
         }
-      }
+
+        site.config['zopfli'] ||= {}
+        site.config['zopfli']['replace_files'] = true
+        Jekyll::Zopfli::Compressor.compress_site(site)
+
+        files.each { |file|
+          expect(File.exist?("#{file}")).to be true
+          expect(File.exist?("#{file}.gz")).to be false
+          expect(File.size(file)).to be < original_stats[file][:size]
+          Zlib::GzipReader.open("#{file}") {|gz|
+            expect(gz.read).to eq(original_stats[file][:content])
+          }
+        }
+      end
     end
 
     describe "given a destination directory" do
