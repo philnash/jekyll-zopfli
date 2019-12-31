@@ -98,6 +98,25 @@ RSpec.describe Jekyll::Zopfli::Compressor do
           }
         }
       end
+
+      it "doesn't compress the files again if they are already compressed and haven't changed" do
+        Jekyll::Zopfli::Compressor.compress_site(site)
+
+        allow(Zopfli).to receive(:deflate)
+
+        Jekyll::Zopfli::Compressor.compress_site(site)
+        expect(Zopfli).not_to have_received(:deflate)
+      end
+
+      it "does compress files that change between compressions" do
+        Jekyll::Zopfli::Compressor.compress_site(site)
+
+        allow(Zopfli).to receive(:deflate).and_call_original
+
+        FileUtils.touch(dest_dir("about/index.html"), mtime: Time.now + 1)
+        Jekyll::Zopfli::Compressor.compress_site(site)
+        expect(Zopfli).to have_received(:deflate).once
+      end
     end
 
     describe "given a destination directory" do
@@ -106,6 +125,25 @@ RSpec.describe Jekyll::Zopfli::Compressor do
         files.each do |file_name|
           expect(File.exist?("#{file_name}.gz")).to be true
         end
+      end
+
+      it "doesn't compress the files again if they are already compressed and haven't changed" do
+        Jekyll::Zopfli::Compressor.compress_directory(dest_dir, site)
+
+        allow(Zopfli).to receive(:deflate)
+
+        Jekyll::Zopfli::Compressor.compress_directory(dest_dir, site)
+        expect(Zopfli).not_to have_received(:deflate)
+      end
+
+      it "does compress files that change between compressions" do
+        Jekyll::Zopfli::Compressor.compress_directory(dest_dir, site)
+
+        allow(Zopfli).to receive(:deflate).and_call_original
+
+        FileUtils.touch(dest_dir("about/index.html"), mtime: Time.now + 1)
+        Jekyll::Zopfli::Compressor.compress_directory(dest_dir, site)
+        expect(Zopfli).to have_received(:deflate).once
       end
     end
   end
