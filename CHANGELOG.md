@@ -1,10 +1,10 @@
 # Changelog
 
-## Ongoing [☰](https://github.com/philnash/jekyll-gzip/compare/v2.4.1...master)
+## Ongoing [☰](https://github.com/philnash/jekyll-zopfli/compare/v2.4.1...master)
 
 ...
 
-## 2.4.1 (2020-01-30) [☰](https://github.com/philnash/jekyll-gzip/compare/v2.4.0...v2.4.1)
+## 2.4.1 (2020-01-30) [☰](https://github.com/philnash/jekyll-zopfli/compare/v2.4.0...v2.4.1)
 
 ### Changed
 
