@@ -1,8 +1,14 @@
 # Changelog
 
-## Ongoing [☰](https://github.com/philnash/jekyll-gzip/compare/v2.4.0...master)
+## Ongoing [☰](https://github.com/philnash/jekyll-gzip/compare/v2.4.1...master)
 
 ...
+
+## 2.4.1 (2020-01-30) [☰](https://github.com/philnash/jekyll-gzip/compare/v2.4.0...v2.4.1)
+
+### Changed
+
+- Fixes the path handed to `Dir.glob` by using `File.join` instead of string concatenation
 
 ## 2.4.0 (2019-12-31) [☰](https://github.com/philnash/jekyll-zopfli/compare/v2.3.0...v2.4.0)
 
