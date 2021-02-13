@@ -2,7 +2,7 @@
 
 Generate gzipped assets and files for your Jekyll site at build time using [Zopfli](https://github.com/google/zopfli) compression.
 
-[![Gem Version](https://badge.fury.io/rb/jekyll-zopfli.svg)](https://rubygems.org/gems/jekyll-zopfli) [![Build Status](https://travis-ci.org/philnash/jekyll-zopfli.svg?branch=master)](https://travis-ci.org/philnash/jekyll-zopfli) [![Maintainability](https://api.codeclimate.com/v1/badges/177f76759bc3b996e9e2/maintainability)](https://codeclimate.com/github/philnash/jekyll-zopfli/maintainability) [![Inline docs](https://inch-ci.org/github/philnash/jekyll-zopfli.svg?branch=master)](https://inch-ci.org/github/philnash/jekyll-zopfli)
+[![Gem Version](https://badge.fury.io/rb/jekyll-zopfli.svg)](https://rubygems.org/gems/jekyll-zopfli) [![Build status](https://github.com/philnash/jekyll-zopfli/workflows/tests/badge.svg)](https://github.com/philnash/jekyll-zopfli/actions) [![Maintainability](https://api.codeclimate.com/v1/badges/177f76759bc3b996e9e2/maintainability)](https://codeclimate.com/github/philnash/jekyll-zopfli/maintainability) [![Inline docs](https://inch-ci.org/github/philnash/jekyll-zopfli.svg?branch=master)](https://inch-ci.org/github/philnash/jekyll-zopfli)
 
 [API docs](http://www.rubydoc.info/gems/jekyll-zopfli/) | [GitHub repo](https://github.com/philnash/jekyll-zopfli)
 
