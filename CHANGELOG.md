@@ -1,8 +1,19 @@
 # Changelog
 
-## Ongoing [☰](https://github.com/philnash/jekyll-zopfli/compare/v2.4.1...master)
+## Ongoing [☰](https://github.com/philnash/jekyll-zopfli/compare/v2.4.1...main)
 
 ...
+
+## 2.5.0 (2021-02-13) [☰](https://github.com/philnash/jekyll-zopfli/compare/v2.4.1...v2.5.0)
+
+### Changed
+
+- Added JSON files to compressable extensions
+- Moved from Travis CI to GitHub Actions
+
+### Fixed
+
+- Stop overwriting Jekyll config, which invalidates the Jekyll cache (see https://github.com/jekyll/jekyll/issues/8551)
 
 ## 2.4.1 (2020-01-30) [☰](https://github.com/philnash/jekyll-zopfli/compare/v2.4.0...v2.4.1)
 
