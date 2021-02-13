@@ -72,6 +72,7 @@ By default, `Jekyll::Zopfli` will compress all files with the following extensio
 - '.html'
 - '.css'
 - '.js'
+- '.json'
 - '.txt'
 - '.ttf'
 - '.atom'
