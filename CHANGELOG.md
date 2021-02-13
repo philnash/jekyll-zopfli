@@ -1,6 +1,6 @@
 # Changelog
 
-## Ongoing [☰](https://github.com/philnash/jekyll-zopfli/compare/v2.4.1...main)
+## Ongoing [☰](https://github.com/philnash/jekyll-zopfli/compare/v2.5.0...main)
 
 ...
 
