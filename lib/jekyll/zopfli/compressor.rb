@@ -91,12 +91,11 @@ module Jekyll
       private
 
       def self.zippable_extensions(site)
-        site.config['zopfli'] && site.config['zopfli']['extensions'] || Jekyll::Zopfli::DEFAULT_CONFIG['extensions']
+        site.config.dig("zopfli", "extensions") || Jekyll::Zopfli::DEFAULT_CONFIG.fetch("extensions")
       end
 
       def self.replace_files(site)
-        replace_files = site.config.dig('zopfli', 'replace_files')
-        replace_files.nil? ? Jekyll::Zopfli::DEFAULT_CONFIG['replace_files'] : replace_files
+        site.config.dig("zopfli", "replace_files") || Jekyll::Zopfli::DEFAULT_CONFIG.fetch("replace_files")
       end
 
       def self.zipped(file_name, replace_file)
